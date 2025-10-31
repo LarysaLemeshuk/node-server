@@ -1,52 +1,20 @@
-const http = require('http');
-const fs = require('fs/promises');
+const express = require('express')
+const app = express()
 
 const PORT = 5002;
 
-const requestListener = async (request, response) => {
-  const { url, method } = request;
+app.get('/', (request, response) => {// http://localhost:5002
+response.send('Hello world')
+})
 
-  if (method === 'GET') {
-    if (url === './index.html') {
-      try {
-        const data = await fs.readFile('./views/index.html', 'utf-8');
-        response.statusCode = 200;
-        response.end(data);
-      } catch (error) {
-        response.statusCode = 404;
-        response.end();
-      }
-    } else if (url === './style.css') {
-      try {
-        const data = await fs.readFile('./style.css', 'utf-8');
-        response.statusCode = 200;
-        response.end(data);
-      } catch (error) {
-        response.statusCode = 404;
-        response.end();
-      }
-    } else {
-      response.statusCode = 404;
-      response.end();
-    }
-  } else if (method === 'POST') {
-    if (url === './user') {
-      let jsonString = '';
-      request.on('data', (chank) => {
-        jsonString += chank;
-      });
-      request.on('end', () => {
-        const user = JSON.parse(jsonString);
-        console.log(user);
+app.get('/index.html', (request, response) => {
+response.status(404).send('Test /index.html')
+})
 
-       response.statusCode = 200;
-       response.end();
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+})
+console.log(app);
 
-      });
-    }
-  }
-};
 
-const server = http.createServer(requestListener);
-
-server.listen(PORT);
+// шлях + метод = роут
