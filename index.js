@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs').promises;
 
 const PORT = 5002;
 
@@ -12,11 +13,20 @@ const requestListener = async (request, response) => {
       response.end(data);
     } catch (error) {
       response.statusCode = 404;
-      response.end('Hello from server');
+      response.end();
+    }
+  } else if (url === './style.css') {
+    try {
+      const data = await fs.readFile('./style.css', 'utf-8');
+      response.statusCode = 200;
+      response.end(data);
+    } catch (error) {
+      response.statusCode = 404;
+      response.end();
     }
   } else {
     response.statusCode = 404;
-    response.end('Hello from server');
+    response.end();
   }
 };
 
