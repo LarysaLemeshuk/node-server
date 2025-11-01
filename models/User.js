@@ -1,4 +1,4 @@
-const bd = new Map();
+const db = new Map();
 
 class User {
   constructor({ firstName, lastName, email, password, isSubscribed = false }) {

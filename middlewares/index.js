@@ -1,4 +1,4 @@
-const { registrationUserSchema } = require('../schemas/index=');
+const { registrationUserSchema } = require('../schemas/index.js');
 
 module.exports.validateUser = async (req, res, next) => {
   try {
