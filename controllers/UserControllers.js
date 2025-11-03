@@ -13,5 +13,10 @@ module.exports.registerUser = (req, res, next) => {
 // метод на отримаггя всх користувачів
 module.exports.getAllUsers = (req, res, next) => {
   const usersArray = User.findAll();
-  response.status(200).send(usersArray);
+  res.status(200).send(usersArray);
 };
+
+// метод контролерра на отримання конкретного користувача
+module.exports.getOneUser = (req, res, next) => {
+  console.log(req.query);
+}
