@@ -26,6 +26,11 @@ class User {
   deleteUser() {
     return db.delete(this.id);
   }
+
+  updateUser(updateFields) {
+    db.set(this.id, { ...this, ...updateFields });
+    return db.get(this.id);
+  }
 }
 
 module.exports = User;

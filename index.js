@@ -18,6 +18,9 @@ app.get('/user/:userId', UserController.getOneUser);
 //роут на видалення юзера
 app.delete('/user/:userId', UserController.deleteOneUser )
 
+// роут на оновлення конткретного користувача
+app.put('/user/:userId', bodyParser, UserController.updateUser)
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
